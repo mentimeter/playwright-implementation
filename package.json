@@ -1,0 +1,11 @@
+{
+  "name": "playwright-implementation",
+  "version": "1.0.0",
+  "description": "Playwright Implementation Example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0"
+}

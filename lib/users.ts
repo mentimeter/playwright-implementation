@@ -59,3 +59,24 @@ export async function createUser(): Promise<User> {
     session_token: user.session_token,
   };
 }
+
+export function getUserAuthFromFile(mentimeterURL: string) {
+  const state = require(`../menti-user.json`);
+  const origin = state.origins.find((o) => o.origin === mentimeterURL);
+  if (!origin) {
+    throw new Error(`no localstorage set for ${mentimeterURL} for menti-user`);
+  }
+
+  const storageItem = origin.localStorage.find(
+    (s) => s.name === "session_token"
+  );
+  if (!storageItem) {
+    throw new Error(
+      `no localstorage session_token set for ${mentimeterURL} in ${origin} for menti-user`
+    );
+  }
+
+  return {
+    Authorization: `Bearer ${storageItem.value}`,
+  };
+}

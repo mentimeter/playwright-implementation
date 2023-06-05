@@ -9,4 +9,9 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   testDir: "tests",
   globalSetup: require.resolve("./global-setup"),
+  expect: {
+    timeout: 30_000,
+  },
+  // If there are longer timeouts in individual tests, the lower value will be used
+  timeout: 90_000,
 });

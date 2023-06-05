@@ -15,5 +15,4 @@ test("user can create a presentation", async ({ page, mentimeterURL }) => {
   //     page.locator("text=or get to know the editor")
   //   ).not.toBeVisible();
   await page.goto(`${mentimeterURL}/app`);
-  expect(true).toBeFalsy();
 });

@@ -1,21 +1,13 @@
-import { test, expect } from "@playwright/test";
-import { SignUpPage } from "../pages/signUpPage";
+import { expect } from "@playwright/test";
+import { test } from "test";
+import { SignUpPage } from "pages";
 
-test("user can create a presentation", async ({ page }) => {
-  //   const homeview = new PresentationTableView(page);
-  //   const editor = new EditorPage(page);
-  //   await homeview.gotoPrivate(mentimeterURL);
-
-  //   await homeview.createPresentation();
-  //   const title = await editor.presentationName.inputValue();
-  //   expect(title).toEqual("Untitled Presentation");
-  //   await expect(
-  //     page.locator("text=or get to know the editor")
-  //   ).not.toBeVisible();
-  //await page.goto("https://wild-puma.mentimeter.app/signup");
+test("user can create a presentation", async ({ page, mentimeterURL }) => {
   const signUpPage = new SignUpPage(page);
-  await signUpPage.goto("https://wild-puma.mentimeter.app");
-  await signUpPage.signUp();
+  await signUpPage.goto(mentimeterURL);
+  await signUpPage.fillSignupForm();
 
+  await signUpPage.skipButton.click();
+  // The first thing a user sees on signup is a an onboarding modal
   await expect(signUpPage.skipButton).toBeVisible();
 });

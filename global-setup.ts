@@ -1,28 +1,38 @@
+import type { User } from "lib";
 import { promises as fsp, existsSync } from "fs";
+import { BASE_MENTIMETER_URL, USER_STATE_FILE } from "test";
+import { createUser } from "lib";
 
-async function createUserState(stateName: string) {
+async function saveUserState(user: User) {
   const stateObject = {
-    orgins: [
+    origins: [
       {
-        origin: "https://wild-puma.mentimeter.app",
+        origin: BASE_MENTIMETER_URL,
         localStorage: [
           {
             name: "session_token",
-            value: "piJAkFh5aaDRpS4_ASVMZx1d1mN1NYU_MKMuc4rfJ2g.36556",
+            value: user.session_token,
+          },
+          // Saving these isn't required, it just helps with debugging
+          {
+            name: "email",
+            value: user.email,
+          },
+          {
+            name: "password",
+            value: user.password,
           },
         ],
       },
     ],
   };
 
-  await fsp.writeFile(stateName, JSON.stringify(stateObject));
+  await fsp.writeFile(USER_STATE_FILE, JSON.stringify(stateObject));
 }
 
-const globalSetup = async () => {
-  const stateName = `menti-user.json`;
-  if (!existsSync(stateName)) {
-    await createUserState(stateName);
+export default async function () {
+  if (!existsSync(USER_STATE_FILE)) {
+    const user = await createUser();
+    await saveUserState(user);
   }
-};
-
-export default globalSetup;
+}

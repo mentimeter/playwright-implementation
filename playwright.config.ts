@@ -8,6 +8,14 @@ import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
   testDir: "tests",
+  outputDir: "test-results",
+  reporter: "html",
+  use: {
+    // We find traces to be the most useful artifacts!
+    video: "off",
+    screenshot: "off",
+    trace: "retain-on-failure",
+  },
   globalSetup: require.resolve("./global-setup"),
   expect: {
     timeout: 30_000,

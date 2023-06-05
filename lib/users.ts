@@ -60,23 +60,35 @@ export async function createUser(): Promise<User> {
   };
 }
 
-export function getUserAuthFromFile(mentimeterURL: string) {
+export function getUserAuthFromFile() {
   const state = require(`../${USER_STATE_FILE}`);
   const origin = state.origins[0];
   if (!origin) {
-    throw new Error(`no localstorage set for ${mentimeterURL} for menti-user`);
+    throw new Error(`no localstorage set for for menti-user`);
   }
 
   const storageItem = origin.localStorage.find(
     (s) => s.name === "session_token"
   );
   if (!storageItem) {
-    throw new Error(
-      `no localstorage session_token set for ${mentimeterURL} in ${origin} for menti-user`
-    );
+    throw new Error(`no localstorage session_token set for menti-user`);
   }
 
   return {
     Authorization: `Bearer ${storageItem.value}`,
   };
+}
+
+export async function deleteUser() {
+  const res = await fetch(`${API_URL}/dev-commands/users`, {
+    method: "DELETE",
+    headers: {
+      ...getUserAuthFromFile(),
+      DEV_COMMANDS_SECRET: "hellortcnapoca2023",
+    },
+  });
+  if (res.status !== 200) {
+    const body = await res.text();
+    throw new Error(`Could not delete user, got ${res.status}, ${body}`);
+  }
 }

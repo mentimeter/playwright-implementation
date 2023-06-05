@@ -1,23 +1,25 @@
 import { getUserAuthFromFile } from "./users";
 
-export async function createPresentation({ mentimeterURL, apiURL }, use) {
+export async function createPresentation({ apiURL }, use) {
   await use(async () => {
-    try {
-      const res = await fetch(`${apiURL}/series`, {
-        method: "POST",
-        headers: {
-          ...getUserAuthFromFile(mentimeterURL),
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: "Lottas prez",
-          pace: "audience",
-        }),
-      });
-      const presentation = await res.json();
-      return presentation;
-    } catch (error) {
-      throw new Error(`Create Presentation call failed: ${error}`);
+    const res = await fetch(`${apiURL}/series`, {
+      method: "POST",
+      headers: {
+        ...getUserAuthFromFile(),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "Lottas prez",
+        pace: "audience",
+      }),
+    });
+    if (res.status !== 200) {
+      const body = await res.text();
+      throw new Error(
+        `Create Presentation call failed: ${res.status}, ${body}`
+      );
     }
+    const presentation = await res.json();
+    return presentation;
   });
 }

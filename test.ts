@@ -4,17 +4,15 @@ export const BASE_MENTIMETER_URL = "https://wild-puma.mentimeter.app";
 export const VOTING_URL = "https://wild-puma.menti.app";
 export const API_URL = "https://wild-puma.api.mentimeter.app";
 
-export interface User {
-  email: string;
-  password: string;
-  sessionToken: string;
-}
+export const USER_STATE_FILE = `menti-user.json`;
 
-export const test = baseTest.extend<{
+interface ProjectTestOptions {
   mentimeterURL: string;
   votingURL: string;
   apiURL: string;
-}>({
+}
+
+export const test = baseTest.extend<ProjectTestOptions>({
   mentimeterURL: BASE_MENTIMETER_URL,
   votingURL: VOTING_URL,
   apiURL: API_URL,

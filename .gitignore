@@ -3,4 +3,4 @@ node_modules/
 /playwright-report/
 /playwright/.cache/
 
-playwright/.auth
+menti-user.json

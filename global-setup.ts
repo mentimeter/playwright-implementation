@@ -1,21 +1,19 @@
-import type { User } from "test";
-import { randomBytes } from "crypto";
+import type { User } from "lib";
 import { promises as fsp, existsSync } from "fs";
-import { API_URL, BASE_MENTIMETER_URL } from "test";
-
-const USER_STATE_FILE = `menti-user.json`;
+import { BASE_MENTIMETER_URL, USER_STATE_FILE } from "test";
+import { createUser } from "lib";
 
 async function saveUserState(user: User) {
   const stateObject = {
-    orgins: [
+    origins: [
       {
         origin: BASE_MENTIMETER_URL,
         localStorage: [
           {
             name: "session_token",
-            value: user.sessionToken,
+            value: user.session_token,
           },
-          // Saving these isn't required, it just eases with debugging
+          // Saving these isn't required, it just helps with debugging
           {
             name: "email",
             value: user.email,
@@ -30,39 +28,6 @@ async function saveUserState(user: User) {
   };
 
   await fsp.writeFile(USER_STATE_FILE, JSON.stringify(stateObject));
-}
-
-const dogs = [
-  "bhotia",
-  "kerryblueterrier",
-  "icelandicsheepdog",
-  "leonberger",
-  "boerboel",
-  "tibetanmastiff",
-  "georgianshepherd",
-  "stephensstock",
-  "segugioitaliano",
-  "bergamascoshepherd",
-  "miniaturebullterrier",
-];
-
-async function createUser(): Promise<User> {
-  const dogName = dogs[Math.floor(Math.random() * dogs.length)];
-  const nowTime = Math.floor(new Date().getTime() / 1000);
-  const randomChars = randomBytes(6).toString("hex");
-
-  const email = `${dogName}-${nowTime}-${randomChars}@testemail.com`;
-  const password = "12345678";
-
-  // TODO change to post with {email, password} body
-  const post_resp = await fetch(`${API_URL}/users`);
-  const user = await post_resp.json();
-
-  return {
-    email,
-    password,
-    sessionToken: user.session_token,
-  };
 }
 
 export default async function () {

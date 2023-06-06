@@ -9,7 +9,7 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   testDir: "tests",
   outputDir: "test-results",
-  //reporter: "html",
+  // reporter: "html",
   use: {
     // We find traces to be the most useful artifacts!
     video: "off",

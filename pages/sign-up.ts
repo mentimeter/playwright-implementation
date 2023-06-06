@@ -3,6 +3,8 @@ import { randomBytes } from "crypto";
 
 export class SignUpPage {
   readonly page: Page;
+  readonly mentimeterURL: string;
+
   readonly email: Locator;
   readonly password: Locator;
   readonly name: Locator;
@@ -10,8 +12,10 @@ export class SignUpPage {
   readonly signUpButton: Locator;
   readonly skipButton: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, mentimeterURL: string) {
     this.page = page;
+    this.mentimeterURL = mentimeterURL;
+
     this.email = this.page.getByTestId("email-input");
     this.password = this.page.getByTestId("password-input");
     this.name = this.page.getByTestId("name-input");
@@ -25,8 +29,8 @@ export class SignUpPage {
     });
   }
 
-  async goto(url: string) {
-    await this.page.goto(`${url}/signup`);
+  async goto() {
+    await this.page.goto(`${this.mentimeterURL}/signup`);
   }
 
   async fillSignupForm() {

@@ -1,6 +1,5 @@
 import { USER_STATE_FILE, test } from "test";
 import { EditorPage, VotePage } from "pages";
-import { expect } from "@playwright/test";
 
 test.use({ storageState: USER_STATE_FILE });
 

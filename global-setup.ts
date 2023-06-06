@@ -3,6 +3,13 @@ import { promises as fsp, existsSync } from "fs";
 import { BASE_MENTIMETER_URL, USER_STATE_FILE } from "test";
 import { createUser } from "lib";
 
+export default async function () {
+  if (!existsSync(USER_STATE_FILE)) {
+    const user = await createUser();
+    await saveUserState(user);
+  }
+}
+
 async function saveUserState(user: User) {
   const stateObject = {
     origins: [
@@ -28,11 +35,4 @@ async function saveUserState(user: User) {
   };
 
   await fsp.writeFile(USER_STATE_FILE, JSON.stringify(stateObject));
-}
-
-export default async function () {
-  if (!existsSync(USER_STATE_FILE)) {
-    const user = await createUser();
-    await saveUserState(user);
-  }
 }

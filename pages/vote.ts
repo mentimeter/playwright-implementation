@@ -13,6 +13,7 @@ export class VotePage {
 
   constructor(page: Page, votingURL: string) {
     this.page = page;
+    this.votingURL = votingURL;
 
     this.voteCodeInput = this.page.locator("id=enter-vote-key");
     this.voteCodeSubmit = this.page.locator("button[type=submit]");

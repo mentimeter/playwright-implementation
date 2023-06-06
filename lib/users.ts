@@ -1,5 +1,5 @@
 import { randomBytes } from "crypto";
-import { API_URL } from "test";
+import { API_URL, USER_STATE_FILE } from "test";
 
 export interface User {
   email: string;
@@ -57,5 +57,26 @@ export async function createUser(): Promise<User> {
     email,
     password,
     session_token: user.session_token,
+  };
+}
+
+export function getUserAuthFromFile(mentimeterURL: string) {
+  const state = require(`../${USER_STATE_FILE}`);
+  const origin = state.origins[0];
+  if (!origin) {
+    throw new Error(`no localstorage set for ${mentimeterURL} for menti-user`);
+  }
+
+  const storageItem = origin.localStorage.find(
+    (s) => s.name === "session_token"
+  );
+  if (!storageItem) {
+    throw new Error(
+      `no localstorage session_token set for ${mentimeterURL} in ${origin} for menti-user`
+    );
+  }
+
+  return {
+    Authorization: `Bearer ${storageItem.value}`,
   };
 }

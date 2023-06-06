@@ -1,4 +1,5 @@
 import { test as baseTest } from "@playwright/test";
+import { createPresentation } from "lib";
 
 export const BASE_MENTIMETER_URL = "https://wild-puma.mentimeter.app";
 export const VOTING_URL = "https://wild-puma.menti.app";
@@ -10,10 +11,12 @@ interface ProjectTestOptions {
   mentimeterURL: string;
   votingURL: string;
   apiURL: string;
+  createPresentation: any;
 }
 
 export const test = baseTest.extend<ProjectTestOptions>({
   mentimeterURL: BASE_MENTIMETER_URL,
   votingURL: VOTING_URL,
   apiURL: API_URL,
+  createPresentation,
 });

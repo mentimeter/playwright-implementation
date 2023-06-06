@@ -6,7 +6,10 @@ export async function createPresentation({ mentimeterURL, apiURL }, use) {
     try {
       const res = await fetch(`${apiURL}/series`, {
         method: "POST",
-        headers: getUserAuthFromFile(mentimeterURL),
+        headers: {
+          ...getUserAuthFromFile(mentimeterURL),
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           name: "Lottas prez",
           pace: "audience",

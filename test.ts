@@ -11,10 +11,12 @@ interface ProjectTestOptions {
   mentimeterURL: string;
   votingURL: string;
   apiURL: string;
+  createPresentation: any;
 }
 
 export const test = baseTest.extend<ProjectTestOptions>({
   mentimeterURL: BASE_MENTIMETER_URL,
   votingURL: VOTING_URL,
   apiURL: API_URL,
+  createPresentation,
 });

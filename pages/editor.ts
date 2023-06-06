@@ -15,7 +15,9 @@ export class EditorPage {
 
   constructor(page: Page, mentimeterURL: string) {
     this.page = page;
-    this.presentationName = page.locator("id=editor-presentation-title");
+    this.presentationName = page.getByRole("textbox", {
+      name: "Presentation name",
+    });
     this.mentimeterURL = mentimeterURL;
 
     this.defaultQuestionPlaceholder =

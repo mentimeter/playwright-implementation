@@ -24,6 +24,8 @@ export class VotePage {
   }
 
   async goto() {
-    this.page.goto(this.votingURL);
+    // networkide wait for helps to reduce react rehydration errors on this form
+    // realistically, this is a bug that affects real users and should be fixed
+    this.page.goto(this.votingURL, { waitUntil: "networkidle" });
   }
 }

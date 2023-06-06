@@ -3,7 +3,6 @@
     "baseUrl": "./",
     "paths": {
       "test": ["test.ts"],
-      "lib": ["lib/index.ts"],
       "pages": ["pages/index.ts"]
     }
   }

@@ -1,5 +1,5 @@
 import { deleteUser } from "lib";
-import { promises as fsp, existsSync } from "fs";
+import { promises as fsp } from "fs";
 import { USER_STATE_FILE } from "test";
 
 export default async function () {

@@ -9,7 +9,7 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   testDir: "tests",
   outputDir: "test-results",
-  reporter: "html",
+  //reporter: "html",
   use: {
     // We find traces to be the most useful artifacts!
     video: "off",
@@ -17,6 +17,7 @@ export default defineConfig({
     trace: "retain-on-failure",
   },
   globalSetup: require.resolve("./global-setup"),
+  globalTeardown: require.resolve("./global-teardown"),
   expect: {
     timeout: 30_000,
   },

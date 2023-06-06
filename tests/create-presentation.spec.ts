@@ -9,8 +9,9 @@ test.use({ storageState: USER_STATE_FILE });
 test("user can create a presentation", async ({ mentimeterURL, page }) => {
   const homeview = new HomeviewPage(page, mentimeterURL);
   const editor = new EditorPage(page, mentimeterURL);
+
   await homeview.goto();
-  await homeview.createPresentation();
+  await homeview.newPresentationButton.click();
 
   const title = await editor.presentationName.inputValue();
   expect(title).toEqual("My First Presentation");

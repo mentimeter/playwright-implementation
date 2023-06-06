@@ -17,8 +17,4 @@ export class HomeviewPage {
   async goto() {
     await this.page.goto(`${this.mentimeterURL}/app/dashboard`);
   }
-
-  async createPresentation() {
-    await this.newPresentationButton.click();
-  }
 }

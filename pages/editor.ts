@@ -13,6 +13,8 @@ export class EditorPage {
 
   readonly voteCode: Locator;
 
+  readonly closePopupButton: Locator;
+
   constructor(page: Page, mentimeterURL: string) {
     this.page = page;
     this.presentationName = page.getByRole("textbox", {
@@ -28,6 +30,10 @@ export class EditorPage {
     this.secondOptionInput = this.page.getByTestId("option-input-1");
 
     this.voteCode = this.page.getByTestId("vote-code");
+
+    this.closePopupButton = this.page.getByRole("button", {
+      name: "Close Templates dialog",
+    });
   }
 
   async gotoPresentation(presentation: any) {

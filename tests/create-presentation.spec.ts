@@ -13,6 +13,8 @@ test("user can create a presentation", async ({ mentimeterURL, page }) => {
   await homeview.goto();
   await homeview.newPresentationButton.click();
 
+  await editor.closePopupButton.click();
+
   const title = await editor.presentationName.inputValue();
   expect(["My First Presentation", "Untitled Presentation"]).toContain(title);
 });

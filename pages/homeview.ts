@@ -2,17 +2,20 @@ import type { Locator, Page } from "@playwright/test";
 
 export class HomeviewPage {
   readonly page: Page;
+  readonly mentimeterURL: string;
   readonly newPresentationButton: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, mentimeterURL: string) {
     this.page = page;
+    this.mentimeterURL = mentimeterURL;
+
     this.newPresentationButton = page.locator(
       "data-testid=new-presentation-button"
     );
   }
 
-  async goto(url: string) {
-    await this.page.goto(`${url}/app/dashboard`);
+  async goto() {
+    await this.page.goto(`${this.mentimeterURL}/app/dashboard`);
   }
 
   async createPresentation() {

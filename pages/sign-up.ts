@@ -1,5 +1,6 @@
 import type { Locator, Page } from "@playwright/test";
 import { randomBytes } from "crypto";
+
 export class SignUpPage {
   readonly page: Page;
   readonly email: Locator;

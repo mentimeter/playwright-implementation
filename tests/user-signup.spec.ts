@@ -8,6 +8,6 @@ test("user can create a presentation", async ({ page, mentimeterURL }) => {
   await signUpPage.fillSignupForm();
 
   await signUpPage.skipButton.click();
-  // The first thing a user sees on signup is a an onboarding modal
+  // The first thing a user sees on successful signup is a an onboarding modal
   await expect(signUpPage.skipButton).toBeVisible();
 });

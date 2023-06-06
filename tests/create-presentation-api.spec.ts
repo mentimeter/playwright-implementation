@@ -1,6 +1,6 @@
 import { test } from "test";
 import { expect } from "@playwright/test";
-import { HomeviewPage } from "pages";
+import { DashboardPage } from "pages";
 import { USER_STATE_FILE } from "test";
 
 test.use({ storageState: USER_STATE_FILE });
@@ -14,9 +14,9 @@ test("user can create a presentation via API", async ({
   const presentation = await createPresentation(presentationName);
   expect(presentation.name).toEqual(presentationName);
 
-  const homeviewPage = new HomeviewPage(page, mentimeterURL);
-  await homeviewPage.goto();
+  const dashboardPage = new DashboardPage(page, mentimeterURL);
+  await dashboardPage.goto();
 
-  const title = await homeviewPage.getFirstPresentationName();
+  const title = await dashboardPage.getFirstPresentationName();
   expect(title).toEqual(presentation.name);
 });

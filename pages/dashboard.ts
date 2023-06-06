@@ -1,6 +1,6 @@
 import type { Locator, Page } from "@playwright/test";
 
-export class HomeviewPage {
+export class DashboardPage {
   readonly page: Page;
   readonly mentimeterURL: string;
   readonly newPresentationButton: Locator;

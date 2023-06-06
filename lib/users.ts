@@ -1,5 +1,5 @@
 import { randomBytes } from "crypto";
-import { API_URL } from "test";
+import { API_URL, USER_STATE_FILE } from "test";
 
 export interface User {
   email: string;
@@ -61,8 +61,8 @@ export async function createUser(): Promise<User> {
 }
 
 export function getUserAuthFromFile(mentimeterURL: string) {
-  const state = require(`../menti-user.json`);
-  const origin = state.origins.find((o) => o.origin === mentimeterURL);
+  const state = require(`../${USER_STATE_FILE}`);
+  const origin = state.origins[0];
   if (!origin) {
     throw new Error(`no localstorage set for ${mentimeterURL} for menti-user`);
   }

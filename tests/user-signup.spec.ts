@@ -7,7 +7,7 @@ test("user can sign up", async ({ page, mentimeterURL }) => {
   await signUpPage.goto(mentimeterURL);
   await signUpPage.fillSignupForm();
 
-  await signUpPage.skipButton.click();
+  await signUpPage.signUpButton.click();
   // The first thing a user sees on successful signup is a an onboarding modal
   await expect(signUpPage.skipButton).toBeVisible();
 });

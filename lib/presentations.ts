@@ -1,4 +1,3 @@
-import { request } from "@playwright/test";
 import { getUserAuthFromFile } from "./users";
 
 export async function createPresentation({ mentimeterURL, apiURL }, use) {

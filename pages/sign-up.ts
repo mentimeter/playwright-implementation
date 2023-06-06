@@ -16,7 +16,10 @@ export class SignUpPage {
     this.password = this.page.locator("id=password");
     this.name = this.page.locator("id=name");
 
-    this.signUpButton = this.page.locator('.authWrapper button[type="submit"]');
+    this.signUpButton = this.page.getByRole("button", {
+      name: "Sign up",
+      exact: true,
+    });
     this.skipButton = this.page.locator('button:has-text("Skip")');
   }
 

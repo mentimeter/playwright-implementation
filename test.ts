@@ -1,5 +1,5 @@
 import { test as baseTest } from "@playwright/test";
-import { createPresentation } from "./lib/presentations";
+import { createPresentation } from "lib";
 
 export const BASE_MENTIMETER_URL = "https://wild-puma.mentimeter.app";
 export const VOTING_URL = "https://wild-puma.menti.app";

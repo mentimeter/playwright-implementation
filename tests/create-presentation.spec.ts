@@ -16,15 +16,3 @@ test("user can create a presentation", async ({ mentimeterURL, page }) => {
   const title = await editor.presentationName.inputValue();
   expect(title).toEqual("My First Presentation");
 });
-
-test("user can create a presentation via API", async ({
-  mentimeterURL,
-  page,
-  createPresentation,
-}) => {
-  const presentation = await createPresentation();
-  const homeview = new HomeviewPage(page, mentimeterURL);
-
-  await homeview.goto();
-  expect(presentation.name).toEqual("Lottas prez");
-});

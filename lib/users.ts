@@ -78,3 +78,17 @@ export function getUserAuthFromFile() {
     Authorization: `Bearer ${storageItem.value}`,
   };
 }
+
+export async function deleteUser() {
+  const res = await fetch(`${API_URL}/dev-commands/users`, {
+    method: "DELETE",
+    headers: {
+      ...getUserAuthFromFile(),
+      DEV_COMMANDS_SECRET: "hellortcnapoca2023",
+    },
+  });
+  if (res.status !== 200) {
+    const body = await res.text();
+    throw new Error(`Could not delete user, got ${res.status}, ${body}`);
+  }
+}

@@ -1,7 +1,7 @@
 import { getUserAuthFromFile } from "./users";
 
 export async function createPresentation({ apiURL }, use) {
-  await use(async () => {
+  await use(async (presentationName?: string) => {
     const res = await fetch(`${apiURL}/series`, {
       method: "POST",
       headers: {
@@ -9,8 +9,7 @@ export async function createPresentation({ apiURL }, use) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "Lottas prez",
-        pace: "audience",
+        name: presentationName ?? `e2e-generated-${Date.now()}`,
       }),
     });
     if (res.status !== 200) {

@@ -9,9 +9,7 @@ export class HomeviewPage {
     this.page = page;
     this.mentimeterURL = mentimeterURL;
 
-    this.newPresentationButton = page.locator(
-      "data-testid=new-presentation-button"
-    );
+    this.newPresentationButton = page.getByTestId("new-presentation-button");
   }
 
   async goto() {

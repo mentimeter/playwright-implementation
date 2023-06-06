@@ -12,15 +12,17 @@ export class SignUpPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.email = this.page.locator("id=email");
-    this.password = this.page.locator("id=password");
-    this.name = this.page.locator("id=name");
+    this.email = this.page.getByTestId("email-input");
+    this.password = this.page.getByTestId("password-input");
+    this.name = this.page.getByTestId("name-input");
 
     this.signUpButton = this.page.getByRole("button", {
       name: "Sign up",
       exact: true,
     });
-    this.skipButton = this.page.locator('button:has-text("Skip")');
+    this.skipButton = this.page.getByRole("button", {
+      name: "Skip",
+    });
   }
 
   async goto(url: string) {

@@ -7,7 +7,6 @@ export class VotePage {
   readonly voteCodeInput: Locator;
   readonly voteCodeSubmit: Locator;
 
-  readonly questionTitle: Locator;
   readonly firstQuestionChoice: Locator;
   readonly submitVoteButton: Locator;
 
@@ -15,12 +14,11 @@ export class VotePage {
     this.page = page;
     this.votingURL = votingURL;
 
-    this.voteCodeInput = this.page.locator("id=enter-vote-key");
-    this.voteCodeSubmit = this.page.locator("button[type=submit]");
+    this.voteCodeInput = this.page.getByPlaceholder("1234 5678");
+    this.voteCodeSubmit = this.page.getByRole("button", { name: "Submit" });
 
-    this.questionTitle = this.page.locator("");
-    this.firstQuestionChoice = this.page.locator("[data-testid=choice-0]");
-    this.submitVoteButton = this.page.locator("button[type=submit]");
+    this.firstQuestionChoice = this.page.getByTestId("choice-0");
+    this.submitVoteButton = this.page.getByRole("button", { name: "Submit" });
   }
 
   async goto() {

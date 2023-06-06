@@ -34,16 +34,14 @@ test("vote on multiple choice queston type", async ({
   // Log in to the presentation
   await votePage.voteCodeInput.fill(voteCode);
   await votePage.voteCodeSubmit.click();
-  expect(
-    await votingBrowserPage.getByText("Do you prefer coffee or tea?")
-  ).toBeTruthy();
+  await votingBrowserPage.getByText("Do you prefer coffee or tea?").waitFor();
 
   // Submit a vote
   await votePage.firstQuestionChoice.click();
   await votePage.submitVoteButton.click();
-  expect(
-    await votingBrowserPage.getByRole("heading", {
+  await votingBrowserPage
+    .getByRole("heading", {
       name: "Thank you for your participation!",
     })
-  ).toBeTruthy();
+    .waitFor();
 });
